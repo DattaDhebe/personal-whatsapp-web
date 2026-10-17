@@ -1,77 +1,36 @@
-# WhatsApp Web Android App
+# Personal Messaging Workspace
 
-A comprehensive WhatsApp Web clone with Android support using Flutter, React PWA, Node.js backend, and MySQL database.
+**React · Express · Socket.IO · MySQL · Flutter templates**
 
-## Project Structure
+A personal messaging prototype exploring web chat, authentication and real-time events. The project includes a React client, a Node.js backend and root-level Flutter integration templates.
 
-```
-whatsapp-web-app/
-├── backend/              # Node.js Express server
-│   ├── src/
-│   │   ├── config/      # Database & configuration
-│   │   ├── routes/      # API routes
-│   │   ├── controllers/ # Business logic
-│   │   ├── models/      # Database models
-│   │   ├── middleware/  # Auth & validation
-│   │   └── index.js     # Main server file
-│   └── package.json
-│
-├── frontend/             # React PWA (Web version)
-│   ├── src/
-│   │   ├── components/  # Reusable components
-│   │   ├── pages/       # Page components
-│   │   ├── services/    # API & Socket.io services
-│   │   ├── hooks/       # Custom React hooks
-│   │   └── App.js
-│   └── package.json
-│
-└── android-app/          # Flutter Android app
-    ├── lib/
-    │   ├── screens/     # App screens
-    │   ├── widgets/     # Custom widgets
-    │   ├── services/    # API & Socket.io
-    │   └── main.dart
-    └── pubspec.yaml
-```
+This is an independent learning project. It is not an official WhatsApp client, and the checked-in source does not establish a working integration with the WhatsApp network.
 
-## Features
+## What the source contains
 
-- 📱 **Cross-platform**: Web + Android support
-- 💬 **Real-time Messaging**: Socket.io for instant messages
-- 👥 **Group Chats**: Create and manage group conversations
-- 🔐 **Authentication**: JWT-based user authentication
-- 📞 **Contact Management**: Add and manage contacts
-- 📡 **Online Status**: Real-time user online/offline status
-- 📨 **Message Receipts**: Read and delivery confirmations
-- 🎨 **Responsive UI**: Mobile-first design
+- React login and chat pages under [frontend](frontend).
+- Express authentication routes and a health endpoint under [backend](backend).
+- Socket.IO handlers for messages, typing and online/offline events.
+- MySQL database configuration and a [schema template](backend-schema.sql).
+- Flutter source fragments such as [android-app-main.dart](android-app-main.dart).
 
-## Tech Stack
+**Status:** development prototype. The mobile files are templates rather than a complete checked-in Flutter application. Group chat, persistence and delivery receipts need end-to-end validation before being described as complete.
 
-- **Frontend**: React, Socket.io-client, Material-UI
-- **Mobile**: Flutter
-- **Backend**: Node.js, Express, Socket.io
-- **Database**: MySQL
-- **Authentication**: JWT
+## Local development
 
-## Getting Started
+Use Node.js/npm compatible with the package manifests and a local MySQL database.
 
-### Prerequisites
-- Node.js (v14+)
-- MySQL
-- Flutter SDK (for mobile)
-- npm or yarn
-
-### Backend Setup
+1. Review [backend-.env.example](backend-.env.example) and create a local `backend/.env` using your own database settings and a generated JWT secret.
+2. Review and import [backend-schema.sql](backend-schema.sql) into that database.
+3. Start the backend:
 
 ```bash
 cd backend
 npm install
-cp .env.example .env
-# Update .env with your database credentials
 npm run dev
 ```
 
-### Frontend Setup
+4. Start the web client in another terminal:
 
 ```bash
 cd frontend
@@ -79,15 +38,18 @@ npm install
 npm start
 ```
 
-### Database Setup
+The backend defaults to port `5000`; its process health route is `/health`. Review frontend service URLs and allowed origins before connecting the two processes.
 
-```bash
-mysql -u root -p
-CREATE DATABASE whatsapp_web;
-USE whatsapp_web;
-SOURCE backend/src/config/schema.sql;
-```
+## Repository map
 
-## License
+| Location | Role |
+| --- | --- |
+| [backend/index.js](backend/index.js) | Express server and Socket.IO events |
+| [backend/routes](backend/routes) | Authentication routes |
+| [frontend/src](frontend/src) | Web client |
+| [android-app-pubspec.yaml](android-app-pubspec.yaml) | Mobile dependency template |
+| [SETUP-INSTRUCTIONS.md](SETUP-INSTRUCTIONS.md) | Earlier assembly/setup notes |
 
-MIT
+Earlier setup notes describe intended layouts that may differ from the current snapshot. The directories and manifests above are the starting point for source review. No production deployment or complete test result is claimed.
+
+Part of [Datta Dhebe's engineering portfolio](https://github.com/DattaDhebe).
